@@ -1,70 +1,99 @@
-# Agent_Based_Modelling
-
-# 🦠 Bacterial Chemotaxis Simulation 🧫
-
-## 📌 Overview
-This project simulates the movement of bacteria in a nutrient field using randomized velocity updates and density-based decision making. The bacteria move in response to the concentration of nutrients, adjusting their direction probabilistically.
+# Agent Based Modelling  
+## Bacterial Chemotaxis Simulation
 
 ---
 
-## ✨ Features
-✅ **Bacteria Movement Simulation** – Models random movement and chemotaxis behavior  
-✅ **Density Field Calculation** – Defines nutrient concentration in a 2D environment  
-✅ **Randomized Velocity Updates** – Simulates bacterial tumbling and running  
-✅ **Visualization** – Generates heatmaps of bacteria movement  
+## System Overview
+This project simulates **bacterial chemotaxis** using an **agent-based modeling framework**. Individual bacteria act as autonomous agents that move within a two-dimensional nutrient field, adjusting their velocity probabilistically based on local nutrient density gradients.
+
+The model captures essential run-and-tumble behavior observed in biological chemotaxis systems.
 
 ---
 
-## 📂 Workflow
+## High-Level Architecture
 
-### 1️⃣ Define the Nutrient Field
-- Nutrient density decreases with distance from the center  
-- Optional variation: sharp nutrient boundary at 15 μm  
-
-### 2️⃣ Bacterial Motion Model
-- **Run-and-tumble behavior**:
-  - Move forward if nutrient density increases (probability `P1`)  
-  - Change direction if density decreases (probability `1 - P2`)  
-- Velocity vector updates randomly to simulate tumbling  
-
-### 3️⃣ Simulation & Visualization
-- Simulates bacterial movement for **200 time steps**  
-- Bacteria positions are updated based on chemotaxis rules  
-- **Snapshots saved every 40 steps** for visual inspection  
+### Environment Layer
+- Two-dimensional spatial domain  
+- Nutrient density field defined analytically  
+- Density decreases with distance from the center  
+- Optional sharp nutrient boundary to study gradient effects  
 
 ---
 
-## 📊 Results & Insights
-
-- Bacteria cluster in **high-nutrient regions**, showing effective chemotaxis  
-- Randomized tumbling enables **exploration**, yet favors nutrient-rich zones  
-- **Periodic boundary conditions** ensure continuity in the simulation domain  
-
----
-
-## 🐞 Bug Fixes & Improvements
-
-- 🚨 **Fix Indentation Error in `update()` method**  
-  - ✅ Corrected `self.randomize_velocity()` indentation  
-
-- 🚨 **Fix Duplicate `get_density()` Definition**  
-  - ✅ Removed redundant function definition  
-
-- 🚨 **Fix numpy Import**  
-  - ✅ Replaced `numpy` with `np` to match existing alias in `draw()` function  
+### Agent Layer
+- Each bacterium is modeled as an independent agent  
+- State variables include position, velocity, and local density  
+- Agents operate under periodic boundary conditions  
 
 ---
 
-## 🔚 Conclusion
-This project demonstrates **bacterial chemotaxis** using a simple agent-based model. It provides a solid base to extend toward more complex biological simulations, such as:
+### Motion and Decision Layer
+**Chemotaxis Model:**
+- Run-and-tumble dynamics  
+- Movement decision based on nutrient density comparison  
 
-🔬 Multi-bacteria interactions  
-🦠 Biological pattern formation  
-📉 Real-world chemotaxis studies  
+**Behavior Rules:**
+- Continue moving forward if nutrient density increases (probability $$\( P_1 \)$$ )  
+- Change direction if nutrient density decreases (probability $$\( 1 - P_2 \)$$ )  
+- Velocity vectors randomized to simulate tumbling  
 
 ---
 
-## 📜 License
+### Simulation Layer
+- Discrete-time simulation over fixed time steps  
+- Agent positions updated iteratively based on decision rules  
+- Simulation executed for 200 time steps  
 
-🔓 **MIT License** – Free to use and modify!
+---
 
+### Visualization Layer
+- Heatmaps generated to represent bacterial concentration  
+- Position snapshots saved every 40 time steps  
+- Visual inspection of clustering and migration patterns  
+
+---
+
+## Execution Flow
+1. Define the nutrient density field  
+2. Initialize bacterial agents with random positions and velocities  
+3. Compute local nutrient density for each agent  
+4. Apply run-and-tumble decision rules  
+5. Update agent velocities and positions  
+6. Enforce periodic boundary conditions  
+7. Visualize bacterial distribution at regular intervals  
+
+---
+
+## Results & Insights
+- Bacteria preferentially accumulate in high-nutrient regions  
+- Randomized tumbling enables exploration of the domain  
+- Chemotactic bias leads to emergent clustering behavior  
+- Periodic boundaries maintain spatial continuity  
+
+---
+
+## Bug Fixes & Improvements
+- Fixed indentation error in the velocity randomization routine  
+- Removed duplicate nutrient density function definition  
+- Corrected NumPy alias usage for consistency across modules  
+
+---
+
+## Scalability & Extensibility
+- Supports extension to multi-agent interactions  
+- Can incorporate cell-cell communication mechanisms  
+- Extendable to time-varying or heterogeneous nutrient fields  
+- Suitable as a foundation for biological pattern formation studies  
+
+---
+
+## Applications
+- Agent-based modeling of biological systems  
+- Chemotaxis and microbial behavior studies  
+- Educational demonstrations of emergent dynamics  
+- Prototype simulations for biological transport phenomena  
+
+---
+
+## License
+MIT License. Free to use, modify, and distribute for academic and research purposes.
